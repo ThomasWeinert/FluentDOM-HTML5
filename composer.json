@@ -1,0 +1,21 @@
+{
+    "name": "fluentdom/loader-html5",
+    "type": "library",
+    "description": "HTML5 loader/serializer for FluentDOM",
+    "keywords": ["xml","dom","fluentdom","html5"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "homepage": "http://fluentdom.org",
+    "authors": [
+        {"name": "FluentDOM Contributors", "homepage": "https://github.com/FluentDOM/FluentDOM/contributors"}
+    ],
+    "require": {
+      "php": ">=5.4.0",
+      "fluentdom/fluentdom": "*",
+      "masterminds/html5": "*"
+    },
+    "autoload": {
+        "files" : ["src/plugin.php"],
+        "psr-4": {"FluentDOM\\HTML5\\": "src/"}
+    }
+}

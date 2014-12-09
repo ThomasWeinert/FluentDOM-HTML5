@@ -1,0 +1,10 @@
+imports:
+    - php
+filter:
+    paths: [src/*]
+tools:
+    php_code_coverage: true
+build:
+    dependencies:
+        before:
+            - composer install --prefer-source
