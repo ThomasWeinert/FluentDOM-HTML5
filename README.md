@@ -1,2 +1,37 @@
-Loader-HTML5
-============
+FluentDOM-HTML5
+===============
+
+[![Build Status](https://travis-ci.org/FluentDOM/HTML5.svg?branch=master)](https://travis-ci.org/FluentDOM/HTML5)
+
+
+Adds support for HTML5 to FluentDOM. It adds a loader and a serializer. It uses the
+[HTML5-PHP](https://github.com/Masterminds/html5-php) library.
+
+Installation
+------------
+
+```text
+composer require fluentdom/html5
+```
+
+Loader
+------
+
+The loader registers automatically. You can trigger it with the types `html5` and `text/html5`.
+
+```php
+$document = FluentDOM::load($html5, 'text/html5');
+$query = FluentDOM($html5, 'text/html5');
+```
+
+Serializer
+----------
+
+The serializer needs to be created with for document and can be casted into a string.
+
+```php
+echo new FluentDOM\Html5\Serializer($document);
+```
+
+
+
