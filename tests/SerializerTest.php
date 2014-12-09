@@ -46,5 +46,19 @@ namespace FluentDOM\HTML5 {
         (string)$serializer
       );
     }
+
+    public function testToStringCatchesExceptionAndReturnEmptyString() {
+      $serializer = new Serializer_TestProxy(new Document());
+      $this->assertEquals(
+        '', (string)$serializer
+      );
+    }
+  }
+
+  class Serializer_TestProxy extends Serializer {
+
+    public function asString() {
+      throw new \LogicException('Catch It.');
+    }
   }
 }
