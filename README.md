@@ -7,6 +7,8 @@ FluentDOM-HTML5
 Adds support for HTML5 to FluentDOM. It adds a loader and a serializer. It uses the
 [HTML5-PHP](https://github.com/Masterminds/html5-php) library.
 
+This plugin needs FluentDOM 5.2 aka the current development version.
+
 Installation
 ------------
 
