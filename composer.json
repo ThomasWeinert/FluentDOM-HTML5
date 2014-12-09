@@ -1,5 +1,5 @@
 {
-    "name": "fluentdom/loader-html5",
+    "name": "fluentdom/html5",
     "type": "library",
     "description": "HTML5 loader/serializer for FluentDOM",
     "keywords": ["xml","dom","fluentdom","html5"],
