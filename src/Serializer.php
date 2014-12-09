@@ -29,11 +29,6 @@ namespace FluentDOM\HTML5 {
     private $_options = [];
 
     public function __construct(\DOMDocument $document, array $options = []) {
-      if (!class_exists('Masterminds\\HTML5')) {
-        throw new \LogicException(
-          'HTML5 support missing please install the "masterminds/html5" package'
-        );
-      }
       $this->_document = $document;
       $this->_options = $options;
     }
