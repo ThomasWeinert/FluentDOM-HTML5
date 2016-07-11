@@ -15,8 +15,8 @@
     ],
     "require": {
       "php": ">=5.4.0",
-      "fluentdom/fluentdom": "~5.2",
-      "masterminds/html5": "~2.0"
+      "fluentdom/fluentdom": "~5.3",
+      "masterminds/html5": "~2.2"
     },
     "autoload": {
         "files" : ["src/plugin.php"],
