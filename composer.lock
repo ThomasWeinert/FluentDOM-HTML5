@@ -4,26 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e6ec31bf749bfa018f97a03882123a1a",
-    "content-hash": "89bf7aa426fd4a0e440996b62c64c085",
+    "hash": "e635c598a904d2eea73c041518ea0eea",
+    "content-hash": "ba917637bd1d90b60d2a7529bd5e3714",
     "packages": [
         {
             "name": "fluentdom/fluentdom",
-            "version": "5.3.0",
+            "version": "6.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FluentDOM/FluentDOM.git",
-                "reference": "19c5a3c77c91871d2a2545949b5bde20889fcb45"
+                "reference": "e8d0e48ed33eee4c7abc6e816afab55a106c3dad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/19c5a3c77c91871d2a2545949b5bde20889fcb45",
-                "reference": "19c5a3c77c91871d2a2545949b5bde20889fcb45",
+                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/e8d0e48ed33eee4c7abc6e816afab55a106c3dad",
+                "reference": "e8d0e48ed33eee4c7abc6e816afab55a106c3dad",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
-                "php": ">=5.4.0"
+                "php": ">=5.6.0"
             },
             "suggest": {
                 "fluentdom/css-selector": "Allows to use css selectors."
@@ -55,20 +55,20 @@
                 "jquery",
                 "xml"
             ],
-            "time": "2015-07-07 13:34:07"
+            "time": "2016-12-22 11:12:04"
         },
         {
             "name": "masterminds/html5",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9"
+                "reference": "7866e93dcf0245de22378414e0c2c7350abc45af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/170aa5cb35b29fccafbf5ea63487c013f396fdc9",
-                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/7866e93dcf0245de22378414e0c2c7350abc45af",
+                "reference": "7866e93dcf0245de22378414e0c2c7350abc45af",
                 "shasum": ""
             },
             "require": {
@@ -83,7 +83,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -120,17 +120,110 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2016-05-10 14:11:45"
+            "time": "2016-09-22 11:01:11"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "carica/phpcss",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThomasWeinert/PhpCss.git",
+                "reference": "df4e6884f14038af707fc2d518895ca95858dcb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThomasWeinert/PhpCss/zipball/df4e6884f14038af707fc2d518895ca95858dcb2",
+                "reference": "df4e6884f14038af707fc2d518895ca95858dcb2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCss\\": "src/PhpCss"
+                },
+                "files": [
+                    "src/PhpCss.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT license"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Weinert",
+                    "email": "thomas@weinert.info"
+                }
+            ],
+            "description": "An css selector parser and converter",
+            "time": "2014-06-23 08:25:18"
+        },
+        {
+            "name": "fluentdom/selectors-phpcss",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FluentDOM/Selectors-PHPCss.git",
+                "reference": "aff09a814cbd782a41ec8f4dbb2ef9873cde8819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FluentDOM/Selectors-PHPCss/zipball/aff09a814cbd782a41ec8f4dbb2ef9873cde8819",
+                "reference": "aff09a814cbd782a41ec8f4dbb2ef9873cde8819",
+                "shasum": ""
+            },
+            "require": {
+                "carica/phpcss": "~0.3",
+                "fluentdom/fluentdom": "^5.3||^6.0"
+            },
+            "provide": {
+                "fluentdom/css-selector": "1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/plugin.php"
+                ],
+                "psr-4": {
+                    "FluentDOM\\PhpCss\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FluentDOM Contributors",
+                    "homepage": "https://github.com/FluentDOM/FluentDOM/contributors"
+                }
+            ],
+            "description": "Provides CSS selector for FluentDOM using Carica PHPCss.",
+            "homepage": "http://fluentdom.org",
+            "keywords": [
+                "css",
+                "css selectors",
+                "dom",
+                "jquery",
+                "xml"
+            ],
+            "time": "2016-12-23 15:12:53"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "fluentdom/fluentdom": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.6.0"
     },
     "platform-dev": []
 }

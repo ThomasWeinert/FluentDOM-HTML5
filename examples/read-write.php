@@ -27,7 +27,7 @@ if ($fd = FluentDOM::load($html, 'html5')) {
   echo $fd->saveXml();
 
   echo "\n\n";
-  echo new FluentDOM\Html5\Serializer($fd);
+  echo new FluentDOM\HTML5\Serializer($fd);
 } else {
   echo 'Could not load HTML5 string. Is the "masterminds/html5" package installed?';
 }

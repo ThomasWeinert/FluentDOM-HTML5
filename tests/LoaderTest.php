@@ -8,7 +8,7 @@ namespace FluentDOM\HTML5 {
   class LoaderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @covers FluentDOM\HTML5\Loader
+     * @covers \FluentDOM\HTML5\Loader
      */
     public function testSupportsExpectingFalse() {
       $loader = new Loader();
@@ -16,7 +16,7 @@ namespace FluentDOM\HTML5 {
     }
 
     /**
-     * @covers FluentDOM\HTML5\Loader
+     * @covers \FluentDOM\HTML5\Loader
      */
     public function testLoadReturnsImportedDocument() {
       $html = '<html>
@@ -46,7 +46,7 @@ namespace FluentDOM\HTML5 {
     }
 
     /**
-     * @covers FluentDOM\HTML5\Loader
+     * @covers \FluentDOM\HTML5\Loader
      */
     public function testLoadReturnsNullFormInvlaidSource() {
       $loader = new Loader();

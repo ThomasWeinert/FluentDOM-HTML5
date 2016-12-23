@@ -9,7 +9,7 @@ namespace FluentDOM\HTML5 {
   class SerializerTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @covers FluentDOM\HTML5\Serializer
+     * @covers \FluentDOM\HTML5\Serializer
      */
     public function testLoadReturnsImportedDocument() {
       $xhtml = '<?xml version="1.0"?>

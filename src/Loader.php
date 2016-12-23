@@ -10,6 +10,7 @@ namespace FluentDOM\HTML5 {
 
   use FluentDOM\Document;
   use FluentDOM\Loadable;
+  use FluentDOM\Loader\Options;
   use FluentDOM\Loader\Supports;
 
   use Masterminds\HTML5 as HTML5Support;
@@ -36,28 +37,53 @@ namespace FluentDOM\HTML5 {
      * @see Loadable::load
      * @param string $source
      * @param string $contentType
-     * @param array $options
+     * @param array|\Traversable|Options $options
      * @return Document|NULL
      */
-    public function load($source, $contentType, array $options = []) {
+    public function load($source, $contentType, $options = []) {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support();
-        if ($this->startsWith($source, '<')) {
-          $dom = $html5->loadHTML($source);
-        } else {
-          $dom = $html5->loadHTMLFile($source);
+        $settings = $this->getOptions($options);
+        $settings->isAllowed($sourceType = $settings->getSourceType($source));
+        switch ($sourceType) {
+        case Options::IS_FILE :
+          $document = $html5->loadHTMLFile($source);
+          break;
+        case Options::IS_STRING :
+        default :
+          $document = $html5->loadHTML($source);
         }
-        if (!$dom instanceof Document) {
-          $fd = new Document();
-          if ($dom->documentElement instanceof \DOMElement) {
-            $fd->appendChild($fd->importNode($dom->documentElement, TRUE));
+        if (!$document instanceof Document) {
+          $import = new Document();
+          if ($document->documentElement instanceof \DOMElement) {
+            $import->appendChild($import->importNode($document->documentElement, TRUE));
           }
-          $dom = $fd;
+          $document = $import;
         }
-        $dom->registerNamespace(
+        $document->registerNamespace(
           'html', 'http://www.w3.org/1999/xhtml'
         );
-        return $dom;
+        return $document;
+      }
+      return NULL;
+    }
+
+    private function getOptions($options) {
+      $result = new Options(
+        $options,
+        [
+          Options::CB_IDENTIFY_STRING_SOURCE => function($source) {
+            return $this->startsWith($source, '<');
+          }
+        ]
+      );
+      return $result;
+    }
+
+    public function loadFragment($source, $contentType, $options = []) {
+      if ($this->supports($contentType)) {
+        $html5 = new HTML5Support();
+        return $html5->loadHTMLFragment($source);
       }
       return NULL;
     }

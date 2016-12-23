@@ -19,17 +19,17 @@ namespace FluentDOM\HTML5 {
   class Serializer {
 
     /**
-     * @var \DOMDocument
+     * @var \DOMNode
      */
-    private $_document = NULL;
+    private $_node = NULL;
 
     /**
      * @var array
      */
     private $_options = [];
 
-    public function __construct(\DOMDocument $document, array $options = []) {
-      $this->_document = $document;
+    public function __construct(\DOMNode $node, array $options = []) {
+      $this->_node = $node;
       $this->_options = $options;
     }
 
@@ -43,7 +43,7 @@ namespace FluentDOM\HTML5 {
 
     public function asString() {
       $html5 = new HTML5Support($this->_options);
-      return (string)$html5->saveHTML($this->_document);
+      return (string)$html5->saveHTML($this->_node);
     }
   }
 }

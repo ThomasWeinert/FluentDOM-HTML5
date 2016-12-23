@@ -14,9 +14,12 @@
         }
     ],
     "require": {
-      "php": ">=5.4.0",
-      "fluentdom/fluentdom": "~5.3",
-      "masterminds/html5": "~2.2"
+        "php": ">=5.6.0",
+        "fluentdom/fluentdom": "^6.0",
+        "masterminds/html5": "~2.2"
+    },
+    "require-dev": {
+        "fluentdom/selectors-phpcss": "^1.0"
     },
     "autoload": {
         "files" : ["src/plugin.php"],
