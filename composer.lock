@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e635c598a904d2eea73c041518ea0eea",
-    "content-hash": "ba917637bd1d90b60d2a7529bd5e3714",
+    "hash": "7a4ee7219edc8786fcc5c2d3f90099e9",
+    "content-hash": "270fba86920e9fadf2f461450386f203",
     "packages": [
         {
             "name": "fluentdom/fluentdom",
-            "version": "6.0.x-dev",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FluentDOM/FluentDOM.git",
@@ -217,9 +217,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fluentdom/fluentdom": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
