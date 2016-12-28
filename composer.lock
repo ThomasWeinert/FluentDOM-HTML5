@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "fluentdom/fluentdom",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FluentDOM/FluentDOM.git",
-                "reference": "e8d0e48ed33eee4c7abc6e816afab55a106c3dad"
+                "reference": "cb09b82bab34ad2f3e9daeb9087dff7b850106dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/e8d0e48ed33eee4c7abc6e816afab55a106c3dad",
-                "reference": "e8d0e48ed33eee4c7abc6e816afab55a106c3dad",
+                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/cb09b82bab34ad2f3e9daeb9087dff7b850106dc",
+                "reference": "cb09b82bab34ad2f3e9daeb9087dff7b850106dc",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "jquery",
                 "xml"
             ],
-            "time": "2016-12-22 11:12:04"
+            "time": "2016-12-24 19:07:45"
         },
         {
             "name": "masterminds/html5",
