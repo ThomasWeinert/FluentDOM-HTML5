@@ -13,9 +13,14 @@
             "homepage": "https://github.com/FluentDOM/FluentDOM/contributors"
         }
     ],
+    "config": {
+        "platform": {
+            "php": "5.6"
+        }
+    },
     "require": {
         "php": ">=5.6.0",
-        "fluentdom/fluentdom": "^6.0",
+        "fluentdom/fluentdom": "6.x",
         "masterminds/html5": "~2.2"
     },
     "require-dev": {

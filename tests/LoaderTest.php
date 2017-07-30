@@ -1,11 +1,11 @@
 <?php
 namespace FluentDOM\HTML5 {
 
-  use FluentDOM\TestCase;
+  use PHPUnit\Framework\TestCase;
 
-  require_once(__DIR__.'/../vendor/autoload.php');
+  require_once __DIR__.'/../vendor/autoload.php';
 
-  class LoaderTest extends \PHPUnit_Framework_TestCase {
+  class LoaderTest extends TestCase {
 
     /**
      * @covers \FluentDOM\HTML5\Loader
