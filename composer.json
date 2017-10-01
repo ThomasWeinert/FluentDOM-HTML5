@@ -15,16 +15,16 @@
     ],
     "config": {
         "platform": {
-            "php": "5.6"
+            "php": "7.0"
         }
     },
     "require": {
-        "php": ">=5.6.0",
-        "fluentdom/fluentdom": "6.x",
+        "php": ">=7.0",
+        "fluentdom/fluentdom": "7.x",
         "masterminds/html5": "~2.2"
     },
     "require-dev": {
-        "fluentdom/selectors-phpcss": "^1.0"
+        "fluentdom/selectors-phpcss": "^1.1"
     },
     "autoload": {
         "files" : ["src/plugin.php"],

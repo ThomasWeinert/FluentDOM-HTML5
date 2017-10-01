@@ -4,27 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4baa5aefc9a4626a8f5a5b3508d42a33",
+    "content-hash": "083bbaf17246ff5c0f8773f5f421e473",
     "packages": [
         {
             "name": "fluentdom/fluentdom",
-            "version": "6.2.0",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FluentDOM/FluentDOM.git",
-                "reference": "32063e121ebbb0bd2fdf21a273a8e0184aba59e7"
+                "reference": "fda8452ef698d1ae644d3938513b33d9c3d86eb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/32063e121ebbb0bd2fdf21a273a8e0184aba59e7",
-                "reference": "32063e121ebbb0bd2fdf21a273a8e0184aba59e7",
+                "url": "https://api.github.com/repos/FluentDOM/FluentDOM/zipball/fda8452ef698d1ae644d3938513b33d9c3d86eb7",
+                "reference": "fda8452ef698d1ae644d3938513b33d9c3d86eb7",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
-                "php": ">=5.6.0"
+                "php": ">=7.0"
             },
             "suggest": {
+                "ext-xmlreader": "XMLReader, XML pull parser, read large XMLs",
+                "ext-xmlwriter": "XMLWriter, Write large XMLs",
                 "fluentdom/css-selector": "Allows to use css selectors."
             },
             "type": "library",
@@ -49,25 +51,27 @@
             "description": "A fluent api for the php dom extension.",
             "homepage": "http://fluentdom.org",
             "keywords": [
+                "XMLReader",
+                "XMLWriter",
                 "Xpath",
                 "dom",
                 "jquery",
                 "xml"
             ],
-            "time": "2017-07-29T17:49:41+00:00"
+            "time": "2017-10-01T10:41:43+00:00"
         },
         {
             "name": "masterminds/html5",
-            "version": "2.2.2",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "7866e93dcf0245de22378414e0c2c7350abc45af"
+                "reference": "2c37c6c520b995b761674de3be8455a381679067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/7866e93dcf0245de22378414e0c2c7350abc45af",
-                "reference": "7866e93dcf0245de22378414e0c2c7350abc45af",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/2c37c6c520b995b761674de3be8455a381679067",
+                "reference": "2c37c6c520b995b761674de3be8455a381679067",
                 "shasum": ""
             },
             "require": {
@@ -119,7 +123,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2016-09-22T11:01:11+00:00"
+            "time": "2017-09-04T12:26:28+00:00"
         }
     ],
     "packages-dev": [
@@ -164,24 +168,24 @@
         },
         {
             "name": "fluentdom/selectors-phpcss",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FluentDOM/Selectors-PHPCss.git",
-                "reference": "aff09a814cbd782a41ec8f4dbb2ef9873cde8819"
+                "reference": "9822e463599392887a277250b1902dee92676f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FluentDOM/Selectors-PHPCss/zipball/aff09a814cbd782a41ec8f4dbb2ef9873cde8819",
-                "reference": "aff09a814cbd782a41ec8f4dbb2ef9873cde8819",
+                "url": "https://api.github.com/repos/FluentDOM/Selectors-PHPCss/zipball/9822e463599392887a277250b1902dee92676f2f",
+                "reference": "9822e463599392887a277250b1902dee92676f2f",
                 "shasum": ""
             },
             "require": {
                 "carica/phpcss": "~0.3",
-                "fluentdom/fluentdom": "^5.3||^6.0"
+                "fluentdom/fluentdom": "7.x"
             },
             "provide": {
-                "fluentdom/css-selector": "1.0.0"
+                "fluentdom/css-selector": "1.1.0"
             },
             "type": "library",
             "autoload": {
@@ -211,7 +215,7 @@
                 "jquery",
                 "xml"
             ],
-            "time": "2016-12-23T15:12:53+00:00"
+            "time": "2017-10-01T11:26:39+00:00"
         }
     ],
     "aliases": [],
@@ -224,6 +228,6 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.6"
+        "php": "7.0"
     }
 }

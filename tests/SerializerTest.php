@@ -1,7 +1,7 @@
 <?php
 namespace FluentDOM\HTML5 {
 
-  use FluentDOM\Document;
+  use FluentDOM\DOM\Document;
   use PHPUnit\Framework\TestCase;
 
   require_once __DIR__.'/../vendor/autoload.php';

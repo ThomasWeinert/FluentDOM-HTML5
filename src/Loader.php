@@ -8,7 +8,7 @@
 
 namespace FluentDOM\HTML5 {
 
-  use FluentDOM\Document;
+  use FluentDOM\DOM\Document;
   use FluentDOM\Loadable;
   use FluentDOM\Loader\Options;
   use FluentDOM\Loader\Supports;
@@ -40,7 +40,7 @@ namespace FluentDOM\HTML5 {
      * @param array|\Traversable|Options $options
      * @return Document|NULL
      */
-    public function load($source, $contentType, $options = []) {
+    public function load($source, string $contentType, $options = []) {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support();
         $settings = $this->getOptions($options);
@@ -80,7 +80,7 @@ namespace FluentDOM\HTML5 {
       return $result;
     }
 
-    public function loadFragment($source, $contentType, $options = []) {
+    public function loadFragment($source, string $contentType, $options = []) {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support();
         return $html5->loadHTMLFragment($source);
