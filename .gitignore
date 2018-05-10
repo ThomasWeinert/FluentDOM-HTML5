@@ -1,18 +1,20 @@
-# Ignore generated docs
-docs/
-
-# Ignore composer files
-vendor
-
-# Ignore IDE specific files
-## PHPStorm
+# PHPStorm
 .idea
 
-## Eclipse
+# Eclipse
 .settings
 .project
 .buildpath
 
-/build
+# Composer
+/vendor/
 
+# Phive
+/tools/
+
+# Generated files
+/docs/
+/build/
+
+# Local configuration
 /phpunit.xml
