@@ -1,6 +1,7 @@
 <?php
 namespace FluentDOM\HTML5 {
 
+  use FluentDOM\Loader\Result;
   use PHPUnit\Framework\TestCase;
 
   require_once __DIR__.'/../vendor/autoload.php';
@@ -48,10 +49,51 @@ namespace FluentDOM\HTML5 {
     /**
      * @covers \FluentDOM\HTML5\Loader
      */
-    public function testLoadReturnsNullFormInvlaidSource() {
+    public function testLoadReturnsNullFormInvalidSource() {
       $loader = new Loader();
       $this->assertNull(
         $loader->load(NULL, 'type/invalid')
+      );
+    }
+
+    /**
+     * @covers \FluentDOM\Loader\Html
+     * @covers \FluentDOM\Loader\Supports
+     */
+    public function testLoadWithValidHtmlFragment() {
+      $loader = new Loader();
+      $this->assertInstanceOf(
+        Result::class,
+        $result = $loader->load(
+          '<div>Test</div>Text<input>',
+          'text/html5-fragment'
+        )
+      );
+      $this->assertEquals(
+        '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
+        $result->getDocument()->saveHtml()
+      );
+    }
+
+    /**
+     * @covers \FluentDOM\Loader\Html
+     * @covers \FluentDOM\Loader\Supports
+     */
+    public function testLoadWithValidHtmlFragmentDefinedByOption() {
+      $loader = new Loader();
+      $this->assertInstanceOf(
+        Result::class,
+        $result = $loader->load(
+          '<div>Test</div>Text<input>',
+          'text/html5',
+          [
+            Loader::IS_FRAGMENT => TRUE
+          ]
+        )
+      );
+      $this->assertEquals(
+        '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
+        $result->getDocument()->saveHtml()
       );
     }
   }

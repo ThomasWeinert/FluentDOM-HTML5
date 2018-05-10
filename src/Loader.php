@@ -11,6 +11,7 @@ namespace FluentDOM\HTML5 {
   use FluentDOM\DOM\Document;
   use FluentDOM\Loadable;
   use FluentDOM\Loader\Options;
+  use FluentDOM\Loader\Result;
   use FluentDOM\Loader\Supports;
 
   use Masterminds\HTML5 as HTML5Support;
@@ -22,11 +23,13 @@ namespace FluentDOM\HTML5 {
 
     use Supports;
 
+    const IS_FRAGMENT = 'is_fragment';
+
     /**
      * @return string[]
      */
     public function getSupported() {
-      return ['html5', 'text/html5'];
+      return ['html5', 'text/html5', 'html5-fragment', 'text/html5-fragment'];
     }
 
     /**
@@ -38,20 +41,25 @@ namespace FluentDOM\HTML5 {
      * @param string $source
      * @param string $contentType
      * @param array|\Traversable|Options $options
-     * @return Document|NULL
+     * @return Document|Result|NULL
      */
     public function load($source, string $contentType, $options = []) {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support();
         $settings = $this->getOptions($options);
+        if ($this->isFragment($contentType, $settings)) {
+          $document = new Document();
+          $document->append($html5->loadHTMLFragment($source));
+          return new Result($document, 'text/html5', $document->evaluate('/node()'));
+        }
         $settings->isAllowed($sourceType = $settings->getSourceType($source));
         switch ($sourceType) {
-        case Options::IS_FILE :
-          $document = $html5->loadHTMLFile($source);
+          case Options::IS_FILE :
+            $document = $html5->loadHTMLFile($source);
           break;
-        case Options::IS_STRING :
-        default :
-          $document = $html5->loadHTML($source);
+          case Options::IS_STRING :
+          default :
+            $document = $html5->loadHTML($source);
         }
         if (!$document instanceof Document) {
           $import = new Document();
@@ -66,6 +74,14 @@ namespace FluentDOM\HTML5 {
         return $document;
       }
       return NULL;
+    }
+
+    private function isFragment(string $contentType, $options): bool {
+      return (
+        $contentType === 'html5-fragment' ||
+        $contentType === 'text/html5-fragment' ||
+        $options[self::IS_FRAGMENT]
+      );
     }
 
     private function getOptions($options) {
