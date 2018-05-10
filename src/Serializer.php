@@ -3,7 +3,7 @@
  * Serialize an (XHTML) DOM into a HTML5 string.
  *
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- * @copyright Copyright (c) 2009-2014 Bastian Feder, Thomas Weinert
+ * @copyright Copyright (c) 2009-2018 Bastian Feder, Thomas Weinert
  */
 
 namespace FluentDOM\HTML5 {
@@ -12,21 +12,20 @@ namespace FluentDOM\HTML5 {
 
   /**
    * Serialize an (XHTML) DOM into a HTML5 string.
-   *
-   * @license http://www.opensource.org/licenses/mit-license.php The MIT License
-   * @copyright Copyright (c) 2009-2014 Bastian Feder, Thomas Weinert
    */
   class Serializer {
+
+    const ENCODE_ENTITIES = 'encode_entities';
 
     /**
      * @var \DOMNode
      */
-    private $_node = NULL;
+    private $_node;
 
     /**
      * @var array
      */
-    private $_options = [];
+    private $_options;
 
     public function __construct(\DOMNode $node, array $options = []) {
       $this->_node = $node;

@@ -3,7 +3,7 @@
  * Load a DOM document from a HTML5 string or file
  *
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- * @copyright Copyright (c) 2009-2014 Bastian Feder, Thomas Weinert
+ * @copyright Copyright (c) 2009-2018 Bastian Feder, Thomas Weinert
  */
 
 namespace FluentDOM\HTML5 {
@@ -24,11 +24,13 @@ namespace FluentDOM\HTML5 {
     use Supports;
 
     const IS_FRAGMENT = 'is_fragment';
+    const DISABLE_HTML_NAMESPACE = 'disable_html_ns';
+    const IMPLICIT_NAMESPACES = 'implicit_namespaces';
 
     /**
      * @return string[]
      */
-    public function getSupported() {
+    public function getSupported(): array {
       return ['html5', 'text/html5', 'html5-fragment', 'text/html5-fragment'];
     }
 
@@ -49,17 +51,19 @@ namespace FluentDOM\HTML5 {
         $settings = $this->getOptions($options);
         if ($this->isFragment($contentType, $settings)) {
           $document = new Document();
-          $document->append($html5->loadHTMLFragment($source));
+          $document->append(
+            $html5->loadHTMLFragment($source, $this->getLibraryOptions($settings))
+          );
           return new Result($document, 'text/html5', $document->evaluate('/node()'));
         }
         $settings->isAllowed($sourceType = $settings->getSourceType($source));
         switch ($sourceType) {
           case Options::IS_FILE :
-            $document = $html5->loadHTMLFile($source);
+            $document = $html5->loadHTMLFile($source, $this->getLibraryOptions($settings));
           break;
           case Options::IS_STRING :
           default :
-            $document = $html5->loadHTML($source);
+            $document = $html5->loadHTML($source, $this->getLibraryOptions($settings));
         }
         if (!$document instanceof Document) {
           $import = new Document();
@@ -99,9 +103,19 @@ namespace FluentDOM\HTML5 {
     public function loadFragment($source, string $contentType, $options = []) {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support();
-        return $html5->loadHTMLFragment($source);
+        return $html5->loadHTMLFragment($source, $this->getLibraryOptions($this->getOptions($options)));
       }
       return NULL;
+    }
+
+    private function getLibraryOptions($settings) {
+      $libraryOptions = [
+        'disable_html_ns' => (bool)$settings[self::DISABLE_HTML_NAMESPACE]
+      ];
+      if (\is_array($settings[self::IMPLICIT_NAMESPACES ])) {
+        $libraryOptions =  $settings[self::IMPLICIT_NAMESPACES];
+      }
+      return $libraryOptions;
     }
   }
 }

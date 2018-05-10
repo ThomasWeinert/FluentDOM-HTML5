@@ -49,6 +49,36 @@ namespace FluentDOM\HTML5 {
     /**
      * @covers \FluentDOM\HTML5\Loader
      */
+    public function testLoadReturnsImportedDocumentWithoutNamespaces() {
+      $html = '<html>
+        <head>
+          <title>TEST</title>
+        </head>
+        <body id="foo">
+          <h1>Hello World</h1>
+          <p>This is a test of the HTML5 parser.</p>
+        </body>
+        </html>';
+
+      $loader = new Loader();
+      $this->assertXmlStringEqualsXmlString(
+        '<?xml version="1.0"?>
+        <html>
+          <head>
+            <title>TEST</title>
+          </head>
+          <body id="foo">
+            <h1>Hello World</h1>
+            <p>This is a test of the HTML5 parser.</p>
+          </body>
+        </html>',
+        $loader->load($html, 'text/html5', [Loader::DISABLE_HTML_NAMESPACE => TRUE])->saveXML()
+      );
+    }
+
+    /**
+     * @covers \FluentDOM\HTML5\Loader
+     */
     public function testLoadReturnsNullFormInvalidSource() {
       $loader = new Loader();
       $this->assertNull(
@@ -71,7 +101,7 @@ namespace FluentDOM\HTML5 {
       );
       $this->assertEquals(
         '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
-        $result->getDocument()->saveHtml()
+        $result->getDocument()->saveHTML()
       );
     }
 
@@ -93,7 +123,7 @@ namespace FluentDOM\HTML5 {
       );
       $this->assertEquals(
         '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
-        $result->getDocument()->saveHtml()
+        $result->getDocument()->saveHTML()
       );
     }
   }
