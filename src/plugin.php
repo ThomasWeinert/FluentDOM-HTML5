@@ -11,9 +11,11 @@ namespace FluentDOM\HTML5 {
   );
   \FluentDOM::registerSerializerFactory(
     function($contentType, \DOMNode $node) {
-      return new Serializer($node);
+      return new Serializer($node, [], $contentType);
     },
     'text/html5',
-    'html5'
+    'html5',
+    'text/html5-fragment',
+    'html5-fragment'
   );
 }

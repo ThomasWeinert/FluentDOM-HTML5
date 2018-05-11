@@ -54,7 +54,7 @@ namespace FluentDOM\HTML5 {
           $document->append(
             $html5->loadHTMLFragment($source, $this->getLibraryOptions($settings))
           );
-          return new Result($document, 'text/html5', $document->evaluate('/node()'));
+          return new Result($document, 'text/html5-fragment', $document->evaluate('/node()'));
         }
         $settings->isAllowed($sourceType = $settings->getSourceType($source));
         switch ($sourceType) {

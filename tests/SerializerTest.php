@@ -25,7 +25,7 @@ namespace FluentDOM\HTML5 {
 
       $dom = new Document();
       $dom->preserveWhiteSpace = FALSE;
-      $dom->loadXml($xhtml);
+      $dom->loadXML($xhtml);
 
       $serializer = new Serializer($dom);
 
@@ -57,7 +57,7 @@ namespace FluentDOM\HTML5 {
 
   class Serializer_TestProxy extends Serializer {
 
-    public function asString() {
+    public function asString(): string {
       throw new \LogicException('Catch It.');
     }
   }
