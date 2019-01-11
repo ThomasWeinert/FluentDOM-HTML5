@@ -25,6 +25,7 @@ namespace FluentDOM\HTML5 {
 
     const IS_FRAGMENT = 'is_fragment';
     const DISABLE_HTML_NAMESPACE = 'disable_html_ns';
+    const ENABLE_XML_NAMESPACES = 'xml_namespaces';
     const IMPLICIT_NAMESPACES = 'implicit_namespaces';
 
     /**
@@ -47,7 +48,12 @@ namespace FluentDOM\HTML5 {
      */
     public function load($source, string $contentType, $options = []) {
       if ($this->supports($contentType)) {
-        $html5 = new HTML5Support();
+        $html5 = new HTML5Support(
+          [
+            'xmlNamespaces' => isset($options[self::ENABLE_XML_NAMESPACES])
+              ? (bool)$options[self::ENABLE_XML_NAMESPACES] : FALSE
+          ]
+        );
         $settings = $this->getOptions($options);
         if ($this->isFragment($contentType, $settings)) {
           $document = new Document();
@@ -114,7 +120,7 @@ namespace FluentDOM\HTML5 {
         'disable_html_ns' => (bool)$settings[self::DISABLE_HTML_NAMESPACE]
       ];
       if (\is_array($settings[self::IMPLICIT_NAMESPACES ])) {
-        $libraryOptions =  $settings[self::IMPLICIT_NAMESPACES];
+        $libraryOptions['implicitNamespaces'] =  $settings[self::IMPLICIT_NAMESPACES];
       }
       return $libraryOptions;
     }
