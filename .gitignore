@@ -10,7 +10,7 @@
 /vendor/
 
 # Phive
-/tools/
+/tools/*.bat
 
 # Generated files
 /docs/
