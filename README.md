@@ -2,7 +2,7 @@ FluentDOM-HTML5
 ===============
 
 [![License](https://poser.pugx.org/fluentdom/html5/license.svg)](http://www.opensource.org/licenses/mit-license.php)
-[![Build Status](https://travis-ci.org/ThomasWeinert/FluentDOM-HTML5.svg?branch=master)](https://travis-ci.org/ThomasWeinert/FluentDOM-HTML5)
+[![CI](https://github.com/ThomasWeinert/FluentDOM-HTML5/actions/workflows/ci.yml/badge.svg)](https://github.com/ThomasWeinert/FluentDOM-HTML5/actions/workflows/ci.yml)
 [![Total Downloads](https://poser.pugx.org/fluentdom/html5/downloads.svg)](https://packagist.org/packages/fluentdom/html5)
 [![Latest Stable Version](https://poser.pugx.org/fluentdom/html5/v/stable.svg)](https://packagist.org/packages/fluentdom/html5)
 [![Latest Unstable Version](https://poser.pugx.org/fluentdom/html5/v/unstable.svg)](https://packagist.org/packages/fluentdom/html5)
