@@ -31,11 +31,19 @@ $query = FluentDOM($html5, 'text/html5');
 Serializer
 ----------
 
-The serializer needs to be created with for document and can be casted into a string.
+The serializer needs to be created with a document and can be cast into a string.
 
 ```php
 echo new FluentDOM\Html5\Serializer($document);
 ```
+
+Casting a Nodes/Query instance to a string will use it if the content type matches:
+
+```php
+$query = FluentDOM($html5, 'text/html5');
+echo $query;
+```
+
 
 
 
