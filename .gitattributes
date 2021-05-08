@@ -11,3 +11,7 @@ phpdox.xml export-ignore
 /examples export-ignore
 
 * text eol=lf
+
+*.png binary
+*.jpg binary
+*.phar binary

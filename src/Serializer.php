@@ -8,6 +8,8 @@
 
 namespace FluentDOM\HTML5 {
 
+  use DOMNode;
+  use Exception;
   use Masterminds\HTML5 as HTML5Support;
 
   /**
@@ -15,10 +17,10 @@ namespace FluentDOM\HTML5 {
    */
   class Serializer {
 
-    const ENCODE_ENTITIES = 'encode_entities';
+    public const ENCODE_ENTITIES = 'encode_entities';
 
     /**
-     * @var \DOMNode
+     * @var DOMNode
      */
     private $_node;
 
@@ -32,7 +34,7 @@ namespace FluentDOM\HTML5 {
      */
     private $_isFragment;
 
-    public function __construct(\DOMNode $node, array $options = [], $contentType = 'text/html5') {
+    public function __construct(DOMNode $node, array $options = [], $contentType = 'text/html5') {
       $this->_node = $node;
       $this->_options = $options;
       $this->_isFragment = $contentType === 'text/html5-fragment' ||  $contentType === 'html5-fragment';
@@ -41,7 +43,7 @@ namespace FluentDOM\HTML5 {
     public function __toString() {
       try {
         return $this->asString();
-      } catch (\Exception $e) {
+      } catch (Exception $e) {
         return '';
       }
     }

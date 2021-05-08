@@ -18,3 +18,4 @@
 
 # Local configuration
 /phpunit.xml
+.phpunit.result.cache

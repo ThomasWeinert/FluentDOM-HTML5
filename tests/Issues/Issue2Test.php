@@ -7,11 +7,13 @@ namespace FluentDOM\HTML5 {
 
   class Issue2Test extends TestCase {
 
-    public function testLoadAndSaveFragment() {
-      $result = (string)\FluentDOM::Query('<b>Hello</b><i>World!</i>', 'html5-fragment');
+    public function testLoadAndSaveFragment(): void {
+      $fd = \FluentDOM::Query(
+        '<b>Hello</b><i>World!</i>', 'html5-fragment'
+      );
       $this->assertSame(
         '<b>Hello</b><i>World!</i>',
-        $result
+        (string)$fd
       );
     }
   }

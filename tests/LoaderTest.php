@@ -1,6 +1,9 @@
-<?php
+<?php /** @noinspection HttpUrlsUsage */
+
 namespace FluentDOM\HTML5 {
 
+  use FluentDOM\Exceptions\InvalidSource;
+  use FluentDOM\Exceptions\UnattachedNode;
   use FluentDOM\Loader\Result;
   use PHPUnit\Framework\TestCase;
 
@@ -11,13 +14,17 @@ namespace FluentDOM\HTML5 {
    */
   class LoaderTest extends TestCase {
 
-    public function testSupportsExpectingFalse() {
+    public function testSupportsExpectingFalse(): void {
       $loader = new Loader();
       $this->assertTrue($loader->supports('text/html5'));
     }
 
-    public function testLoadReturnsImportedDocument() {
-      $html = '<html>
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadReturnsImportedDocument(): void {
+      $html = '<html lang="en">
         <head>
           <title>TEST</title>
         </head>
@@ -30,7 +37,7 @@ namespace FluentDOM\HTML5 {
       $loader = new Loader();
       $this->assertXmlStringEqualsXmlString(
         '<?xml version="1.0"?>
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
           <head>
             <title>TEST</title>
           </head>
@@ -39,12 +46,16 @@ namespace FluentDOM\HTML5 {
             <p>This is a test of the HTML5 parser.</p>
           </body>
         </html>',
-        $loader->load($html, 'text/html5')->saveXML()
+        $loader->load($html, 'text/html5')->getDocument()->saveXML()
       );
     }
 
-    public function testLoadReturnsImportedDocumentWithoutNamespaces() {
-      $html = '<html>
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadReturnsImportedDocumentWithoutNamespaces(): void {
+      $html = '<html lang="en">
         <head>
           <title>TEST</title>
         </head>
@@ -57,7 +68,7 @@ namespace FluentDOM\HTML5 {
       $loader = new Loader();
       $this->assertXmlStringEqualsXmlString(
         '<?xml version="1.0"?>
-        <html>
+        <html lang="en">
           <head>
             <title>TEST</title>
           </head>
@@ -66,18 +77,26 @@ namespace FluentDOM\HTML5 {
             <p>This is a test of the HTML5 parser.</p>
           </body>
         </html>',
-        $loader->load($html, 'text/html5', [Loader::DISABLE_HTML_NAMESPACE => TRUE])->saveXML()
+        $loader->load($html, 'text/html5', [Loader::DISABLE_HTML_NAMESPACE => TRUE])->getDocument()->saveXML()
       );
     }
 
-    public function testLoadReturnsNullFormInvalidSource() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadReturnsNullFormInvalidSource(): void {
       $loader = new Loader();
       $this->assertNull(
         $loader->load(NULL, 'type/invalid')
       );
     }
 
-    public function testLoadWithValidHtmlFragment() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithValidHtmlFragment(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,
@@ -86,13 +105,19 @@ namespace FluentDOM\HTML5 {
           'text/html5-fragment'
         )
       );
+      /** @noinspection CheckTagEmptyBody */
+      /** @noinspection HtmlExtraClosingTag */
       $this->assertEquals(
         '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
         $result->getDocument()->saveHTML()
       );
     }
 
-    public function testLoadWithValidHtmlFragmentDefinedByOption() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithValidHtmlFragmentDefinedByOption(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,
@@ -104,13 +129,19 @@ namespace FluentDOM\HTML5 {
           ]
         )
       );
+      /** @noinspection CheckTagEmptyBody */
+      /** @noinspection HtmlExtraClosingTag */
       $this->assertEquals(
         '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>Text<input xmlns="http://www.w3.org/1999/xhtml"></input>',
         $result->getDocument()->saveHTML()
       );
     }
 
-    public function testLoadWithXMLNamespacesSupportEnabled() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithXMLNamespacesSupportEnabled(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,
@@ -129,7 +160,11 @@ namespace FluentDOM\HTML5 {
       );
     }
 
-    public function testLoadWithXMLNamespacesSupportDisabled() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithXMLNamespacesSupportDisabled(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,
@@ -147,7 +182,11 @@ namespace FluentDOM\HTML5 {
       );
     }
 
-    public function testLoadWithImplicitNamespaces() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithImplicitNamespaces(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,
@@ -168,7 +207,11 @@ namespace FluentDOM\HTML5 {
       );
     }
 
-    public function testLoadWithoutImplicitNamespaces() {
+    /**
+     * @throws InvalidSource
+     * @throws UnattachedNode
+     */
+    public function testLoadWithoutImplicitNamespaces(): void {
       $loader = new Loader();
       $this->assertInstanceOf(
         Result::class,

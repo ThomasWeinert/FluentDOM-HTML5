@@ -8,10 +8,15 @@
 
 namespace FluentDOM\HTML5 {
 
+  use DOMElement;
   use FluentDOM\DOM\Document;
+  use FluentDOM\DOM\DocumentFragment;
+  use FluentDOM\Exceptions\InvalidSource;
+  use FluentDOM\Exceptions\UnattachedNode;
   use FluentDOM\Loadable;
   use FluentDOM\Loader\Options;
   use FluentDOM\Loader\Result;
+  use FluentDOM\Loader\Result as LoaderResult;
   use FluentDOM\Loader\Supports;
 
   use Masterminds\HTML5 as HTML5Support;
@@ -23,10 +28,11 @@ namespace FluentDOM\HTML5 {
 
     use Supports;
 
-    const IS_FRAGMENT = 'is_fragment';
-    const DISABLE_HTML_NAMESPACE = 'disable_html_ns';
-    const ENABLE_XML_NAMESPACES = 'xml_namespaces';
-    const IMPLICIT_NAMESPACES = 'implicit_namespaces';
+    public const IS_FRAGMENT = 'is_fragment';
+    public const DISABLE_HTML_NAMESPACE = 'disable_html_ns';
+    public const ENABLE_XML_NAMESPACES = 'xml_namespaces';
+    public const IMPLICIT_NAMESPACES = 'implicit_namespaces';
+    private const XMLNS_XHTML = 'http://www.w3.org/1999/xhtml';
 
     /**
      * @return string[]
@@ -40,28 +46,30 @@ namespace FluentDOM\HTML5 {
      *
      * @codeCoverageIgnore
      *
-     * @see Loadable::load
      * @param string $source
      * @param string $contentType
-     * @param array|\Traversable|Options $options
-     * @return Document|Result|NULL
+     * @param array $options
+     * @return LoaderResult
+     * @throws InvalidSource|UnattachedNode
+     * @see Loadable::load
      */
-    public function load($source, string $contentType, $options = []) {
+    public function load($source, string $contentType, $options = []): ?LoaderResult {
       if ($this->supports($contentType)) {
         $html5 = new HTML5Support(
           [
-            'xmlNamespaces' => isset($options[self::ENABLE_XML_NAMESPACES])
-              ? (bool)$options[self::ENABLE_XML_NAMESPACES] : FALSE
+            'xmlNamespaces' => isset($options[self::ENABLE_XML_NAMESPACES]) && $options[self::ENABLE_XML_NAMESPACES]
           ]
         );
         $settings = $this->getOptions($options);
         if ($this->isFragment($contentType, $settings)) {
           $document = new Document();
+          $document->registerNamespace('html', self::XMLNS_XHTML);
           $document->append(
             $html5->loadHTMLFragment($source, $this->getLibraryOptions($settings))
           );
-          $document->registerNamespace('html', 'http://www.w3.org/1999/xhtml');
-          return new Result($document, 'text/html5-fragment', $document->evaluate('/node()'));
+          return new Result(
+            $document, 'text/html5-fragment', $document->childNodes
+          );
         }
         $settings->isAllowed($sourceType = $settings->getSourceType($source));
         switch ($sourceType) {
@@ -74,15 +82,15 @@ namespace FluentDOM\HTML5 {
         }
         if (!$document instanceof Document) {
           $import = new Document();
-          if ($document->documentElement instanceof \DOMElement) {
+          if ($document->documentElement instanceof DOMElement) {
             $import->appendChild($import->importNode($document->documentElement, TRUE));
           }
           $document = $import;
         }
         $document->registerNamespace(
-          'html', 'http://www.w3.org/1999/xhtml'
+          'html', self::XMLNS_XHTML
         );
-        return $document;
+        return new LoaderResult($document, $contentType);
       }
       return NULL;
     }
@@ -95,8 +103,8 @@ namespace FluentDOM\HTML5 {
       );
     }
 
-    private function getOptions($options) {
-      $result = new Options(
+    private function getOptions($options): Options {
+      return new Options(
         $options,
         [
           Options::CB_IDENTIFY_STRING_SOURCE => function($source) {
@@ -104,22 +112,35 @@ namespace FluentDOM\HTML5 {
           }
         ]
       );
-      return $result;
     }
 
-    public function loadFragment($source, string $contentType, $options = []) {
+    /**
+     * @throws UnattachedNode
+     */
+    public function loadFragment($source, string $contentType, $options = []): ?DocumentFragment {
       if ($this->supports($contentType)) {
+        $document = new Document();
+        $document->registerNamespace('html', self::XMLNS_XHTML);
         $html5 = new HTML5Support();
-        return $html5->loadHTMLFragment($source, $this->getLibraryOptions($this->getOptions($options)));
+        /** @var DocumentFragment $fragment */
+        $fragment = $document->importNode(
+          $html5->loadHTMLFragment(
+            $source,
+            $this->getLibraryOptions($this->getOptions($options))
+          ),
+          true
+        );
+        $document->append($fragment);
+        return $fragment;
       }
       return NULL;
     }
 
-    private function getLibraryOptions($settings) {
+    private function getLibraryOptions($settings): array {
       $libraryOptions = [
         'disable_html_ns' => (bool)$settings[self::DISABLE_HTML_NAMESPACE]
       ];
-      if (\is_array($settings[self::IMPLICIT_NAMESPACES ])) {
+      if (is_array($settings[self::IMPLICIT_NAMESPACES ])) {
         $libraryOptions['implicitNamespaces'] =  $settings[self::IMPLICIT_NAMESPACES];
       }
       return $libraryOptions;

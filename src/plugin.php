@@ -10,7 +10,7 @@ namespace FluentDOM\HTML5 {
     'html5-fragment'
   );
   \FluentDOM::registerSerializerFactory(
-    function($contentType, \DOMNode $node) {
+    function(\DOMNode $node, string $contentType) {
       return new Serializer($node, [], $contentType);
     },
     'text/html5',
